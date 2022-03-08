@@ -1,0 +1,13 @@
+create table micro.users
+(
+	id serial
+		constraint users_pk
+			primary key,
+	username varchar not null,
+	password varchar not null,
+	last_login timestamp,
+	roles varchar
+);
+
+alter table micro.users owner to postgres;
+

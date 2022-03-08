@@ -4,20 +4,23 @@ import net.alphastar.microservicea.DAO.UsersDao;
 import net.alphastar.microservicea.DTO.HelloObject;
 import net.alphastar.microservicea.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
+@RequestMapping("/api")
 public class HelloService {
 
     @Autowired
     private UsersDao usersDao;
 
     @GetMapping(path = "/hello")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public HelloObject sayHello() {
 
         for (Users user: usersDao.findAll()) {
