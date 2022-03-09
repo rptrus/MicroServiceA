@@ -24,10 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userDetailsService);
-        //auth.inMemoryAuthentication().withUser("rohan").password("{noop}password").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("rohan").password("$2a$10$a89v06ied5ZWvnL5raVilOymiLGOrWs1LeDC/vVoYaz4tlj7Bmd16").roles("ADMIN");
-        //.passwordEncoder(encodedPass);
+        auth.userDetailsService(userDetailsService);
+        //auth.inMemoryAuthentication().withUser("rohan").password("$2a$10$a89v06ied5ZWvnL5raVilOymiLGOrWs1LeDC/vVoYaz4tlj7Bmd16").roles("ADMIN");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,19 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/**").hasRole("ADMIN")
                 .and().csrf().disable();
     }
-
-
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
-//            throws Exception
-//    {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password("{noop}password")
-//                .roles("USER");
-//    }
-
 }
+
+// NOTES on responses received
+
 /*
 { no httpBasic
     "timestamp": "2022-03-08T11:45:52.886+00:00",
